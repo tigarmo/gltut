@@ -1,0 +1,7 @@
+name: gltut
+
+dependencies:
+  - python=3.7
+  - freeglut
+  - pyopengl
+  - watchdog
