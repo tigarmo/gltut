@@ -1,7 +1,8 @@
 name: gltut
 
 dependencies:
-  - python=3.7
+  - python=3.6
   - freeglut
-  - pyopengl
+    # pyopengl > 3.1.0 can't find the freeglut libs (??)
+  - pyopengl=3.1.0
   - watchdog
