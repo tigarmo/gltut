@@ -1,33 +1,28 @@
-import sys
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-# The display() method does all the work; it has to call the appropriate
-# OpenGL functions to actually display something.
+
 def display():
-    # Clear the color and depth buffers
-    glClearColor(224/255,255/255,255/255, 1.0)
+    glClearColor(224 / 255, 255 / 255, 255 / 255, 1.0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glLoadIdentity()
 
-    # ... render stuff in here ...
-    # It will go to an off-screen frame buffer.
+    glColor3f(1.0, 0.0, 0.0)
+    glRotatef(45, 0, 0, 1)
 
-    # Copy the off-screen buffer to the screen.
+    glBegin(GL_QUADS)
+    glVertex3f(-0.5, -0.5, 0.0)
+    glVertex3f(0.5, -0.5, 0.0)
+    glVertex3f(0.5, 0.5, 0.0)
+    glVertex3f(-0.5, 0.5, 0.0)
+    glEnd()
+
     glutSwapBuffers()
 
-glutInit(sys.argv)
 
-# Create a double-buffer RGBA window.   (Single-buffering is possible.
-# So is creating an index-mode window.)
+glutInit(sys.argv)
 glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 glutInitWindowSize(600, 600)
-
-# Create a window, setting its title
-glutCreateWindow(b'interactive')
-
-# Set the display callback.  You can set other callbacks for keyboard and
-# mouse events.
+glutCreateWindow(b"gltut")
 glutDisplayFunc(display)
-
-# Run the GLUT main loop until the user closes the window.
 glutMainLoop()
