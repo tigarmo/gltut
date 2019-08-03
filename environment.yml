@@ -6,3 +6,4 @@ dependencies:
     # pyopengl > 3.1.0 can't find the freeglut libs (??)
   - pyopengl=3.1.0
   - watchdog
+  - black
