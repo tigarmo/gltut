@@ -6,6 +6,8 @@ import numpy as np
 
 angle = 0.0
 angle_location = None
+float_x = 1.0
+light_x_location = None
 
 
 def display():
@@ -47,7 +49,6 @@ def build_geometry():
 
 def _compile_shader_source(shader_id, shader_path):
     contents = Path(shader_path).read_text()
-    print(contents)
     glShaderSource(shader_id, contents)
     glCompileShader(shader_id)
     compile_ok = glGetShaderiv(shader_id, GL_COMPILE_STATUS)
@@ -71,20 +72,24 @@ def compile_shaders():
 
     glUseProgram(program)
 
-    global angle_location
+    global angle_location, light_x_location
     angle_location = glGetUniformLocation(program, "angle")
+    light_x_location = glGetUniformLocation(program, "light_x")
 
 
 def special(key, _x, _y):
-    global angle
-    if key == GLUT_KEY_DOWN:
+    global angle, float_x
+    if key == GLUT_KEY_END:
         glutLeaveMainLoop()
         return
     if key == GLUT_KEY_LEFT:
         angle -= 5
+        float_x += 0.5
     elif key == GLUT_KEY_RIGHT:
         angle += 5
+        float_x -= 0.5
     glUniform1f(angle_location, angle)
+    glUniform1f(light_x_location, float_x)
     glutPostRedisplay()
 
 

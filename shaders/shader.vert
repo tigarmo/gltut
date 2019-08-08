@@ -22,6 +22,6 @@ mat4 rotationMatrix(vec3 axis, float angle)
 void main(){
     vec3 axis = vec3(0.0, 0.0, 1.0);
     vec4 transformed_vertex = rotationMatrix(axis, radians(angle)) * vec4(vertex_pos * 0.5, 1.0);
-    pos = transformed_vertex.xy;
+    pos = vertex_pos.xy;
     gl_Position = transformed_vertex;
 }
