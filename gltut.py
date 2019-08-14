@@ -11,7 +11,7 @@ light_x_location = None
 
 
 def display():
-    glClearColor(224 / 255, 255 / 255, 255 / 255, 1.0)
+    glClearColor(0.0, 0.0, 0.0, 1.0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, None)
@@ -28,8 +28,12 @@ def build_geometry():
     vao = glGenVertexArrays(1)
     glBindVertexArray(vao)
 
-    verts = np.array(
-        [-1.0, -1.0, 0.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0, -1.0, 1.0, 0.0],
+    verts = np.array([
+        -1.0, -1.0, 0.0, # p0
+        1.0, -1.0, 0.0,  # p1
+        1.0, 1.0, 0.0,   # p2
+        -1.0, 1.0, 0.0   # p3
+        ],
         dtype=np.float32,
     )
 
@@ -38,7 +42,14 @@ def build_geometry():
     glBufferData(GL_ARRAY_BUFFER, verts, GL_STATIC_DRAW)
 
     glEnableVertexAttribArray(0)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
+    glVertexAttribPointer(
+        0, # index
+        3, # size (components)
+        GL_FLOAT, # type
+        GL_FALSE, # normalized
+        0, # stride
+        None # pointer
+    )
 
     elements = np.array([0, 1, 2, 0, 2, 3], dtype=np.int32)
 
